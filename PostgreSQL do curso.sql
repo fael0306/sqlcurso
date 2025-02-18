@@ -85,3 +85,10 @@ SELECT ce.nome, ce.email, te.numero AS Celular
 FROM cliente ce JOIN telefone te ON ce.idcliente=te.id_cliente
 JOIN endereco en ON ce.idcliente=en.id_cliente
 WHERE en.estado='SP' and ce.sexo='F';
+
+UPDATE cliente
+SET email = NULL
+WHERE idcliente = 1;
+
+SELECT nome, cpf, coalesce(email,'Desconhecido') as email from cliente
+where email is NULL;
