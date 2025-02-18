@@ -105,3 +105,5 @@ JOIN endereco en ON cl.idcliente=en.id_cliente
 WHERE en.estado='RJ';
 
 SELECT * FROM info_clientes_RJ;
+
+SELECT nome, rua, bairro FROM info_clientes_RJ;
