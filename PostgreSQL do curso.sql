@@ -53,3 +53,35 @@ WHERE cl.idcliente = 1;
 SELECT ce.nome, ce.email, en.rua FROM cliente ce JOIN endereco en
 ON ce.idcliente=en.id_cliente
 WHERE idcliente=3;
+
+CREATE TABLE TELEFONE(
+	IDTELEFONE SERIAL PRIMARY KEY, 
+	TIPO VARCHAR(3) NOT NULL,
+	NUMERO VARCHAR(10) NOT NULL,
+	ID_CLIENTE INT
+);
+
+INSERT INTO TELEFONE (TIPO, NUMERO, ID_CLIENTE) VALUES
+('CEL', '9876543210', 1),
+('RES', '3456789012', 2),
+('COM', '4567890123', 3),
+('CEL', '9123456789', 4),
+('RES', '3234567890', 5),
+('COM', '4345678901', 6),
+('CEL', '9765432109', 7),
+('RES', '3012345678', 8),
+('COM', '4987654321', 9),
+('CEL', '9654321098', 10);
+
+ALTER TABLE telefone
+ADD CONSTRAINT cs_telefone FOREIGN KEY (id_cliente) REFERENCES cliente(idcliente);
+
+SELECT ce.nome, ce.email, te.numero AS Celular
+FROM cliente ce JOIN telefone te ON ce.idcliente=te.id_cliente
+JOIN endereco en ON ce.idcliente=en.id_cliente
+WHERE en.estado='RJ' and te.tipo='COM';
+
+SELECT ce.nome, ce.email, te.numero AS Celular
+FROM cliente ce JOIN telefone te ON ce.idcliente=te.id_cliente
+JOIN endereco en ON ce.idcliente=en.id_cliente
+WHERE en.estado='SP' and ce.sexo='F';
