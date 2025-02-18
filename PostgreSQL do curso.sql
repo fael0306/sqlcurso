@@ -92,3 +92,16 @@ WHERE idcliente = 1;
 
 SELECT nome, cpf, coalesce(email,'Desconhecido') as email from cliente
 where email is NULL;
+
+SELECT cl.nome, cl.email, te.numero, en.rua, en.bairro 
+FROM cliente cl JOIN telefone te ON cl.idcliente=te.id_cliente
+JOIN endereco en ON cl.idcliente=en.id_cliente
+WHERE en.estado='RJ';
+
+CREATE VIEW info_clientes_RJ AS
+SELECT cl.nome, cl.email, te.numero, en.rua, en.bairro 
+FROM cliente cl JOIN telefone te ON cl.idcliente=te.id_cliente
+JOIN endereco en ON cl.idcliente=en.id_cliente
+WHERE en.estado='RJ';
+
+SELECT * FROM info_clientes_RJ;
