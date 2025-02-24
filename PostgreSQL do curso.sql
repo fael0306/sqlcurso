@@ -198,10 +198,10 @@ SELECT
   nome, 
   cpf, 
   coalesce(email, 'Desconhecido') as email 
-from 
+FROM 
   cliente 
-where 
-  email is NULL;
+WHERE 
+  email IS NULL;
   
 SELECT 
   cl.nome, 
