@@ -266,14 +266,22 @@ WHERE
   iddcliente = cl.idcliente 
 ORDER BY 
   nome;
+  
 END;
+
 $$ LANGUAGE plpgsql;
 
-CREATE PROCEDURE dados_cliente_proc(iddcliente INT, OUT nomeproc VARCHAR, OUT cpfproc VARCHAR) AS $$
-BEGIN
-  SELECT nome, cpf 
-  INTO nomeproc, cpfproc
-  FROM cliente 
-  WHERE iddcliente = iddcliente;
-END
-$$ LANGUAGE plpgsql;
+CREATE PROCEDURE dados_cliente_proc(
+  iddcliente INT, OUT nomeproc VARCHAR, 
+  OUT cpfproc VARCHAR
+) AS $$ BEGIN 
+SELECT 
+  nome, 
+  cpf INTO nomeproc, 
+  cpfproc 
+FROM 
+  cliente 
+WHERE 
+  iddcliente = iddcliente;
+  
+END $$ LANGUAGE plpgsql;
