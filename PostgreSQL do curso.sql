@@ -249,15 +249,15 @@ or REPLACE function dados_cliente(iddcliente INT) RETURNS TABLE (
   telefone_tipo TEXT, telefone_numero TEXT
 ) AS $$ BEGIN RETURN QUERY 
 SELECT 
-  cl.nome :: text, 
-  coalesce(cl.email, 'Não informado') :: text, 
-  cl.cpf :: text, 
-  en.rua :: text, 
-  en.bairro :: text, 
-  en.cidade :: text, 
-  en.estado :: text, 
-  te.tipo :: text, 
-  te.numero :: text 
+  cl.nome :: TEXT, 
+  coalesce(cl.email, 'Não informado') :: TEXT, 
+  cl.cpf :: TEXT, 
+  en.rua :: TEXT, 
+  en.bairro :: TEXT, 
+  en.cidade :: TEXT, 
+  en.estado :: TEXT, 
+  te.tipo :: TEXT, 
+  te.numero :: TEXT 
 FROM 
   cliente cl 
   JOIN endereco en ON cl.idcliente = en.id_cliente 
