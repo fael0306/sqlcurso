@@ -242,8 +242,8 @@ SELECT
 FROM 
   info_clientes_RJ;
   
-create 
-or replace function dados_cliente(iddcliente INT) returns table (
+CREATE 
+or REPLACE function dados_cliente(iddcliente INT) RETURNS TABLE (
   nome TEXT, email TEXT, cpf TEXT, rua TEXT, 
   bairro TEXT, cidade TEXT, estado TEXT, 
   telefone_tipo TEXT, telefone_numero TEXT
@@ -258,15 +258,13 @@ SELECT
   en.estado :: text, 
   te.tipo :: text, 
   te.numero :: text 
-from 
+FROM 
   cliente cl 
-  join endereco en on cl.idcliente = en.id_cliente 
-  join telefone te on cl.idcliente = te.id_cliente 
-where 
+  JOIN endereco en ON cl.idcliente = en.id_cliente 
+  JOIN telefone te ON cl.idcliente = te.id_cliente 
+WHERE 
   iddcliente = cl.idcliente 
-order by 
+ORDER BY 
   nome;
-  
-end;
-
+END;
 $$ LANGUAGE plpgsql;
