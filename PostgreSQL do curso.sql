@@ -241,3 +241,32 @@ SELECT
   bairro 
 FROM 
   info_clientes_RJ;
+  
+create 
+or replace function dados_cliente(iddcliente INT) returns table (
+  nome TEXT, email TEXT, cpf TEXT, rua TEXT, 
+  bairro TEXT, cidade TEXT, estado TEXT, 
+  telefone_tipo TEXT, telefone_numero TEXT
+) AS $$ BEGIN RETURN QUERY 
+SELECT 
+  cl.nome :: text, 
+  coalesce(cl.email, 'Não informado') :: text, 
+  cl.cpf :: text, 
+  en.rua :: text, 
+  en.bairro :: text, 
+  en.cidade :: text, 
+  en.estado :: text, 
+  te.tipo :: text, 
+  te.numero :: text 
+from 
+  cliente cl 
+  join endereco en on cl.idcliente = en.id_cliente 
+  join telefone te on cl.idcliente = te.id_cliente 
+where 
+  iddcliente = cl.idcliente 
+order by 
+  nome;
+  
+end;
+
+$$ LANGUAGE plpgsql;
