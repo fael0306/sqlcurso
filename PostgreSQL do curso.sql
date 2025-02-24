@@ -117,7 +117,6 @@ FROM
   JOIN endereco en ON cl.idcliente = en.id_cliente 
 WHERE 
   cl.idcliente = 1;
-  
 SELECT 
   nome, 
   email, 
@@ -127,7 +126,6 @@ FROM
   JOIN endereco en ON cl.idcliente = en.id_cliente 
 WHERE 
   cl.idcliente = 1;
-  
 SELECT 
   ce.nome, 
   ce.email, 
@@ -137,7 +135,6 @@ FROM
   JOIN endereco en ON ce.idcliente = en.id_cliente 
 WHERE 
   idcliente = 3;
-  
 CREATE TABLE TELEFONE(
   IDTELEFONE SERIAL PRIMARY KEY, 
   TIPO VARCHAR(3) NOT NULL, 
@@ -174,7 +171,6 @@ FROM
 WHERE 
   en.estado = 'RJ' 
   and te.tipo = 'COM';
-  
 SELECT 
   ce.nome, 
   ce.email, 
@@ -186,14 +182,12 @@ FROM
 WHERE 
   en.estado = 'SP' 
   and ce.sexo = 'F';
-  
 UPDATE 
   cliente 
 SET 
   email = NULL 
 WHERE 
   idcliente = 1;
-  
 SELECT 
   nome, 
   cpf, 
@@ -202,7 +196,6 @@ FROM
   cliente 
 WHERE 
   email IS NULL;
-  
 SELECT 
   cl.nome, 
   cl.email, 
@@ -215,7 +208,6 @@ FROM
   JOIN endereco en ON cl.idcliente = en.id_cliente 
 WHERE 
   en.estado = 'RJ';
-  
 CREATE VIEW info_clientes_RJ AS 
 SELECT 
   cl.nome, 
@@ -229,19 +221,16 @@ FROM
   JOIN endereco en ON cl.idcliente = en.id_cliente 
 WHERE 
   en.estado = 'RJ';
-  
 SELECT 
   * 
 FROM 
   info_clientes_RJ;
-  
 SELECT 
   nome, 
   rua, 
   bairro 
 FROM 
   info_clientes_RJ;
-  
 CREATE 
 or REPLACE FUNCTION dados_cliente(iddcliente INT) RETURNS TABLE (
   nome TEXT, email TEXT, cpf TEXT, rua TEXT, 
@@ -266,11 +255,8 @@ WHERE
   iddcliente = cl.idcliente 
 ORDER BY 
   nome;
-  
 END;
-
 $$ LANGUAGE plpgsql;
-
 CREATE PROCEDURE dados_cliente_proc(
   iddcliente INT, OUT nomeproc VARCHAR, 
   OUT cpfproc VARCHAR
@@ -283,9 +269,7 @@ FROM
   cliente 
 WHERE 
   iddcliente = iddcliente;
-  
 END $$ LANGUAGE plpgsql;
-
 CREATE TABLE vendedores(
   idvendedor SERIAL PRIMARY KEY, 
   nome VARCHAR(30), 
@@ -336,6 +320,19 @@ WHERE
   janeiro = (
     SELECT 
       MIN(janeiro) 
+    FROM 
+      vendedores
+  );
+  
+SELECT 
+  nome, 
+  marco 
+FROM 
+  vendedores 
+WHERE 
+  marco > (
+    SELECT 
+      avg(marco) 
     FROM 
       vendedores
   );
