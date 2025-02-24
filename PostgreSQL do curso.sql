@@ -285,3 +285,57 @@ WHERE
   iddcliente = iddcliente;
   
 END $$ LANGUAGE plpgsql;
+
+CREATE TABLE vendedores(
+  idvendedor SERIAL PRIMARY KEY, 
+  nome VARCHAR(30), 
+  sexo CHAR(1), 
+  janeiro FLOAT, 
+  marco FLOAT
+);
+
+INSERT INTO vendedores (nome, sexo, janeiro, marco) 
+VALUES 
+  (
+    'João Silva', 'M', 1000.00, 1100.00
+  ), 
+  (
+    'Maria Oliveira', 'F', 1200.00, 1300.00
+  ), 
+  (
+    'Carlos Souza', 'M', 900.00, 950.00
+  ), 
+  (
+    'Ana Costa', 'F', 1100.00, 1150.00
+  ), 
+  (
+    'José Pereira', 'M', 1050.00, 1075.00
+  ), 
+  (
+    'Fernanda Lima', 'F', 1300.00, 1400.00
+  ), 
+  (
+    'Ricardo Santos', 'M', 1150.00, 1200.00
+  ), 
+  (
+    'Luciana Rocha', 'F', 1000.00, 1050.00
+  ), 
+  (
+    'Pedro Almeida', 'M', 1250.00, 1300.00
+  ), 
+  (
+    'Juliana Martins', 'F', 950.00, 1000.00
+  );
+  
+SELECT 
+  nome, 
+  janeiro 
+FROM 
+  vendedores 
+WHERE 
+  janeiro = (
+    SELECT 
+      MIN(janeiro) 
+    FROM 
+      vendedores
+  );
