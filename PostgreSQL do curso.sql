@@ -243,7 +243,7 @@ FROM
   info_clientes_RJ;
   
 CREATE 
-or REPLACE function dados_cliente(iddcliente INT) RETURNS TABLE (
+or REPLACE FUNCTION dados_cliente(iddcliente INT) RETURNS TABLE (
   nome TEXT, email TEXT, cpf TEXT, rua TEXT, 
   bairro TEXT, cidade TEXT, estado TEXT, 
   telefone_tipo TEXT, telefone_numero TEXT
